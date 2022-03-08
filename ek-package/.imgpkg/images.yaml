@@ -1,0 +1,16 @@
+---
+apiVersion: imgpkg.carvel.dev/v1alpha1
+images:
+- annotations:
+    kbld.carvel.dev/id: docker.io/bitnami/bitnami-shell:10-debian-10-r138
+  image: index.docker.io/bitnami/bitnami-shell@sha256:425570b82ac31c5c95f95fca6a7ac4564a249c3c41cde752547a81f04a8999d9
+- annotations:
+    kbld.carvel.dev/id: docker.io/bitnami/elasticsearch-curator:5.8.4-debian-10-r0
+  image: index.docker.io/bitnami/elasticsearch-curator@sha256:1bce279648fbdfc52511b609c1ba8f49f83f3c593a2190de521650ea0be00df7
+- annotations:
+    kbld.carvel.dev/id: docker.io/bitnami/elasticsearch:7.2.1
+  image: index.docker.io/bitnami/elasticsearch@sha256:08fb13e585646b6990466c6a1789836a83928373b8033faf24a0253f2790dde7
+- annotations:
+    kbld.carvel.dev/id: docker.io/bitnami/kibana:7.2.1
+  image: index.docker.io/bitnami/kibana@sha256:64648d5fd8af538d179c129c5966e01af4a261b36181035f3f16a7b44b280203
+kind: ImagesLock

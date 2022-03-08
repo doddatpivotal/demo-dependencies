@@ -1,0 +1,46 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana
+  namespace: #@ data.values.namespace
+  labels:
+    app: kibana
+spec:
+  ports:
+  - port: 5601
+  selector:
+    app: kibana
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kibana
+  namespace: #@ data.values.namespace
+  labels:
+    app: kibana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kibana
+  template:
+    metadata:
+      labels:
+        app: kibana
+    spec:
+      containers:
+      - name: kibana
+        image: docker.io/bitnami/kibana:7.2.1
+        resources:
+          limits:
+            cpu: 1000m
+          requests:
+            cpu: 100m
+        env:
+        - name: ELASTICSEARCH_URL
+          value: http://elasticsearch:9200
+        ports:
+        - containerPort: 5601
+

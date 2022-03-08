@@ -1,0 +1,18 @@
+#@ load("@ytt:data", "data")
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: elasticsearch
+  namespace: #@ data.values.namespace
+  labels:
+    app: elasticsearch
+spec:
+  selector:
+    app: elasticsearch
+  type: ClusterIP
+  ports:
+    - port: 9200
+      name: rest
+    - port: 9300
+      name: inter-node

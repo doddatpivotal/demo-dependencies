@@ -1,0 +1,9 @@
+#@data/values-schema
+---
+namespace: elasticsearch-kibana
+elasticsearch:
+  ingress:
+    virtual_host_fqdn: ""
+kibana:
+  ingress:
+    virtual_host_fqdn: ""

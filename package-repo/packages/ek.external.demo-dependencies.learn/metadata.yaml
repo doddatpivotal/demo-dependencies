@@ -1,0 +1,11 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  # This will be the name of our package
+  name: ek-external.demo-dependencies.learn
+spec:
+  displayName: "Elasticsearch & Kibana"
+  longDescription: "Non-production elasticsearch and kibana service to demonstrate target of log shipping"
+  shortDescription: "Elasticsearch and Kibana for demoing"
+  categories:
+  - demo

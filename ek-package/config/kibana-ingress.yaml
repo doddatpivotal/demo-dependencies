@@ -1,0 +1,23 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kibana
+  namespace: #@ data.values.namespace
+  labels:
+    app: kibana
+  annotations:
+    kubernetes.io/ingress.class: contour
+spec:
+  rules:
+  - host: #@ data.values.kibana.ingress.virtual_host_fqdn
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+           name: kibana
+           port:
+             number: 5601

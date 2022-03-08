@@ -1,0 +1,10 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageRepository
+metadata:
+  name: demo-dependencies-package-repository
+spec:
+  fetch:
+    git:
+      url: https://doddatpivotal/demo-dependencies
+      ref: origin/main
+      subPath: package-repo
