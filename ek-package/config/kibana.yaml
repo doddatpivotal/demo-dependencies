@@ -15,8 +15,7 @@ metadata:
 spec:
   ports:
   - port: 5601
-  selector:
-    app: kibana
+  selector: #@ labels()
 ---
 apiVersion: apps/v1
 kind: Deployment

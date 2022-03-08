@@ -1,4 +1,9 @@
 #@ load("@ytt:data", "data")
+
+#@ def labels():
+app: elasticsearch
+#@ end
+
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -11,12 +16,10 @@ spec:
   serviceName: elasticsearch
   replicas: 1
   selector:
-    matchLabels:
-      app: elasticsearch
+    matchLabels: #@ labels()
   template:
     metadata:
-      labels:
-        app: elasticsearch
+      labels: #@ labels()
     spec:
       containers:
       - name: elasticsearch

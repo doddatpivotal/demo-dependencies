@@ -1,4 +1,9 @@
 #@ load("@ytt:data", "data")
+
+#@ def labels():
+app: elasticsearch
+#@ end
+
 ---
 kind: Service
 apiVersion: v1
@@ -8,8 +13,7 @@ metadata:
   labels:
     app: elasticsearch
 spec:
-  selector:
-    app: elasticsearch
+  selector: #@ labels()
   type: ClusterIP
   ports:
     - port: 9200
