@@ -18,7 +18,7 @@ spec:
       - git:
           url: https://github.com/doddatpivotal/demo-dependencies
           ref: origin/main
-          subPath: ek-package
+          subPath: #@ "packages/ek/" + data.values.version + "/bundle"
       template:
       - ytt:
           paths:
