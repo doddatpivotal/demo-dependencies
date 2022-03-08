@@ -1,0 +1,10 @@
+#@ load("@ytt:data", "data")
+---
+auth:
+  rootUser: admin
+  rootPassword: #@ data.values.auth.rootPassword
+service:
+  type: LoadBalancer
+defaultBuckets: #@ data.values.defaultBuckets
+persistence:
+  size: #@ data.values.persistence.size

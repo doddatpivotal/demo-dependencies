@@ -27,10 +27,10 @@ spec:
       template:
         - ytt:
             paths:
-            - config/
+            - config/values-schema.yaml
+            - config/helm-values.yaml
         - helmTemplate:
             valuesFrom:
-              - secretRef:
-                  name: minio-values
+               - path: "-"
       deploy:
       - kapp: {}
