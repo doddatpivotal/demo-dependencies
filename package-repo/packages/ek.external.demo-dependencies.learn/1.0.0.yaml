@@ -1,9 +1,9 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
-  name: ek-external.demo-dependencies.learn.1.0.0
+  name: ek.external.demo-dependencies.learn.1.0.0
 spec:
-  refName: ek-external.demo-dependencies.learn
+  refName: ek.external.demo-dependencies.learn
   version: 1.0.0
   releaseNotes: |
     Initial release of the demo dependencies elasticsearch and kibana package

@@ -15,8 +15,27 @@ ytt -f ek-package/package-template.yaml  --data-value-file openapi=<(ytt -f ek-p
 kbld -f package-repo/packages/ --imgpkg-lock-output package-repo/.imgpkg/images.yaml
 ```
 
-## Apply Package Repository
+## Work with package repository
 
 ```bash
 kubectl apply -f package-repo/package-repository.yaml
+
+tanzu package repository list
+tanzu package available list
+tanzu package available get ek.external.demo-dependencies.learn/1.0.0
+tanzu package available get ek.external.demo-dependencies.learn/1.0.0 --values-schema
+
+cat > /tmp/values.yaml << EOF
+elasticsearch:
+  ingress:
+    virtual_host_fqdn: "elasticsearch.foo.org"
+kibana:
+  ingress:
+    virtual_host_fqdn: "logs.foo.org"
+EOF
+
+tanzu package install elasticsearch-kibana \
+    --package-name ek-external.demo-dependencies.learn \
+    --version 1.0.0 \
+    --values-file /tmp/values.yaml
 ```

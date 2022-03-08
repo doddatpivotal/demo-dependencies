@@ -1,9 +1,12 @@
 #@data/values-schema
 ---
+#@schema/desc "Namespace to deploy"
 namespace: elasticsearch-kibana
 elasticsearch:
   ingress:
+    #@schema/desc "Ingress FQDN"
     virtual_host_fqdn: ""
 kibana:
   ingress:
+    #@schema/desc "Ingress FQDN"
     virtual_host_fqdn: ""
