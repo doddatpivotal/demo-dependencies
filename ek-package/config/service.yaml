@@ -9,7 +9,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: elasticsearch
-  namespace: #@ data.values.namespace
+  namespace: default
   labels:
     app: elasticsearch
 spec:

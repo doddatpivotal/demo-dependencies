@@ -1,9 +1,7 @@
-#@ load("@ytt:data", "data")
----
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  namespace: #@ data.values.namespace
+  namespace: default
   labels:
     app: curator
   name: curator-elasticsearch-curator
