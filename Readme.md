@@ -35,7 +35,7 @@ kibana:
 EOF
 
 tanzu package install elasticsearch-kibana \
-    --package-name ek-external.demo-dependencies.learn \
+    --package-name ek.external.demo-dependencies.learn \
     --version 1.0.0 \
     --values-file /tmp/values.yaml
 ```
