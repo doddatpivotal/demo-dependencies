@@ -5,6 +5,6 @@ metadata:
 spec:
   fetch:
     git:
-      url: https://doddatpivotal/demo-dependencies
+      url: https://github.com/doddatpivotal/demo-dependencies
       ref: origin/main
       subPath: package-repo
