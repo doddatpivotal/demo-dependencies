@@ -1,0 +1,23 @@
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: minio
+spec:
+  serviceAccountName: default-ns-sa
+  packageRef:
+    refName: minio.external.demo-dependencies.learn
+    versionSelection:
+      constraints: 1.0.0
+  values:
+  - secretRef:
+      name: minio-values
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: minio-values
+stringData:
+  values.yml: |
+    ---
+    namespace: foo
