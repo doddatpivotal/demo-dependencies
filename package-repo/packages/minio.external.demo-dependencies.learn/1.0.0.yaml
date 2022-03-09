@@ -44,16 +44,15 @@ spec:
           ref: origin/main
           subPath: packages/minio/1.0.0/bundle
       template:
+      - helmTemplate:
+          namespace: minio
+          path: chart/
       - ytt:
           ignoreUnknownComments: true
           paths:
           - '-'
           - chart/values.yaml
           - config/
-      - helmTemplate:
-          path: chart/
-          valuesFrom:
-          - path: '-'
       - kbld:
           paths:
           - '-'

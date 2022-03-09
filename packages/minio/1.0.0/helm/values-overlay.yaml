@@ -1,15 +1,12 @@
-#@ load("@ytt:data", "data")
+#! This to set non-configurable overrides to the default.values.yaml
+
 #@ load("@ytt:overlay", "overlay")
 
 
 #@overlay/match by=overlay.all
 ---
-
 auth:
   rootUser: admin
-  rootPassword: #@ data.values.auth.rootPassword
 service:
   type: LoadBalancer
-defaultBuckets: #@ data.values.defaultBuckets
-persistence:
-  size: #@ data.values.persistence.size
+defaultBuckets: backup
