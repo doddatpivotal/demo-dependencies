@@ -10,6 +10,11 @@ ytt -f packages/ek/1.0.0/package-template.yaml \
 cp packages/ek/metadata.yaml package-repo/packages/ek.external.demo-dependencies.learn/
 
 # Handle Minio Package
+
+pushd packages/minio/1.0.0
+vendir sync
+popd
+
 # Generate package file from from template
 ytt -f packages/minio/1.0.0/package-template.yaml \
     --data-value-file openapi=<(ytt -f packages/minio/1.0.0/bundle/config/values-schema.yaml --data-values-schema-inspect -o openapi-v3) \

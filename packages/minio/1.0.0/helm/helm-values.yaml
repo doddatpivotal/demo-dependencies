@@ -1,5 +1,10 @@
 #@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+
+
+#@overlay/match by=overlay.all
 ---
+
 auth:
   rootUser: admin
   rootPassword: #@ data.values.auth.rootPassword

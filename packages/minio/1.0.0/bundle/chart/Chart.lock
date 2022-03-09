@@ -1,0 +1,6 @@
+dependencies:
+- name: common
+  repository: https://charts.app-catalog.vmware.com/demo
+  version: 1.11.1
+digest: sha256:06a5851e6d27f4cd761f70444c1313330c2c06b6ebb5537277050d67810f53c3
+generated: "2022-02-16T19:25:40.850258785Z"

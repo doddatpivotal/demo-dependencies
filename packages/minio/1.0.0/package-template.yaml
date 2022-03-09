@@ -19,18 +19,19 @@ spec:
             url: https://github.com/doddatpivotal/demo-dependencies
             ref: origin/main
             subPath: #@ "packages/minio/" + data.values.version + "/bundle"
-        - helmChart:
-            name: minio
-            version: "10.1.8"
-            repository:
-              url: https://charts.app-catalog.vmware.com/demo
       template:
-        - ytt:
-            paths:
-            - config/values-schema.yaml
-            - config/helm-values.yaml
         - helmTemplate:
-            valuesFrom:
-               - path: "-"
-      deploy:
-      - kapp: {}
+          path: chart/
+        - ytt:
+          ignoreUnknownComments: true
+          paths:
+          - '-'
+          #! This was a really great idea to just use the same values file from helm and ytt.
+          - chart/values.yaml
+          - config/
+        - kbld:
+          paths:
+          - '-'
+          - .imgpkg/images.yml
+          deploy:
+          - kapp: {}
