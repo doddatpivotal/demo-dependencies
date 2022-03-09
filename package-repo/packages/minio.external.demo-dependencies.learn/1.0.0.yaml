@@ -43,20 +43,20 @@ spec:
           url: https://github.com/doddatpivotal/demo-dependencies
           ref: origin/main
           subPath: packages/minio/1.0.0/bundle
-      # - helmChart:
-      #     name: minio
-      #     version: 10.1.8
-      #     repository:
-      #       url: https://charts.app-catalog.vmware.com/demo
       template:
       - ytt:
+          ignoreUnknownComments: true
           paths:
-          - config/values-schema.yaml
-          - config/helm-values.yaml
-      # - helmTemplate:
-      #     valuesFrom:
-      #     - secretRef:
-      #         name: minio-values
-          # - path: '-'
-      deploy:
-      - kapp: {}
+          - '-'
+          - chart/values.yaml
+          - config/
+      - helmTemplate:
+          path: chart/
+          valuesFrom:
+          - path: '-'
+      - kbld:
+          paths:
+          - '-'
+          - .imgpkg/images.yml
+          deploy:
+          - kapp: {}

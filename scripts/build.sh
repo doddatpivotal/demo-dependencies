@@ -15,6 +15,10 @@ pushd packages/minio/1.0.0
 vendir sync
 popd
 
+# mv packages/minio/1.0.0/bundle/chart/values.yaml packages/minio/1.0.0/bundle/chart/values.yaml.original
+# echo -e "#@data/values\n---\n\n" > packages/minio/1.0.0/bundle/chart/values.yaml
+# ytt -f packages/minio/1.0.0/bundle/chart/values.yaml.original --file-mark "values.yaml.original:type=yaml-plain" -f packages/minio/1.0.0/helm/values-overlay.yaml >> packages/minio/1.0.0/bundle/chart/values.yaml
+
 # Generate package file from from template
 ytt -f packages/minio/1.0.0/package-template.yaml \
     --data-value-file openapi=<(ytt -f packages/minio/1.0.0/bundle/config/values-schema.yaml --data-values-schema-inspect -o openapi-v3) \

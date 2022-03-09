@@ -20,18 +20,21 @@ spec:
             ref: origin/main
             subPath: #@ "packages/minio/" + data.values.version + "/bundle"
       template:
-        - helmTemplate:
-          path: chart/
         - ytt:
-          ignoreUnknownComments: true
-          paths:
-          - '-'
-          #! This was a really great idea to just use the same values file from helm and ytt.
-          - chart/values.yaml
-          - config/
+            ignoreUnknownComments: true
+            paths:
+            - '-'
+            #! This was a really great idea to just use the same values file from helm and ytt.
+            - chart/values.yaml
+            - config/
+        - helmTemplate:
+            path: chart/
+            valuesFrom:
+            - path: "-"
+
         - kbld:
-          paths:
-          - '-'
-          - .imgpkg/images.yml
-          deploy:
-          - kapp: {}
+            paths:
+            - '-'
+            - .imgpkg/images.yml
+            deploy:
+            - kapp: {}
