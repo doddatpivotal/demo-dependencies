@@ -17,6 +17,7 @@ popd
 
 WORKING_FOLDER=packages/minio/1.0.0/bundle
 SERVICE_FOLDER=minio
+PACKAGE=minio
 
 mv ${WORKING_FOLDER}/chart/values.yaml ${WORKING_FOLDER}/chart/values.yaml.original
 echo -e "#@data/values\n---\n\n" > ${WORKING_FOLDER}/chart/values.yaml
@@ -35,7 +36,7 @@ helm template ${PACKAGE} ${WORKING_FOLDER}/chart --namespace sample-namespace --
 
 # Generate package file from from template
 ytt -f packages/minio/1.0.0/package-template.yaml \
-    --data-value-file openapi=<(ytt -f packages/minio/1.0.0/bundle/config/values-schema.yaml --data-values-schema-inspect -o openapi-v3) \
+    --data-value-file openapi=<(ytt -f packages/minio/1.0.0/values-schema.yaml --data-values-schema-inspect -o openapi-v3) \
     -v version="1.0.0" > package-repo/packages/minio.external.demo-dependencies.learn/1.0.0.yaml
 # Copy over metada file
 cp packages/minio/metadata.yaml package-repo/packages/minio.external.demo-dependencies.learn/

@@ -1,3 +1,7 @@
 ---
 apiVersion: imgpkg.carvel.dev/v1alpha1
+images:
+- annotations:
+    kbld.carvel.dev/id: gcr.io/sys-2b0109it/demo/bitnami/minio:2022.2.16-centos-7-r0
+  image: gcr.io/sys-2b0109it/demo/bitnami/minio@sha256:1a2d535b5e4dafbc4f5af2984c854f1df2cc46aa53f94c386aa565569a0738ad
 kind: ImagesLock

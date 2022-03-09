@@ -1,3 +1,194 @@
 #! I am a sample that was automatically generated with 
 
 ---
+---
+apiVersion: v1
+automountServiceAccountToken: true
+kind: ServiceAccount
+metadata:
+  labels:
+    app.kubernetes.io/instance: minio
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: minio
+    helm.sh/chart: minio-10.1.8
+  name: minio
+  namespace: sample-namespace
+secrets:
+- name: minio
+---
+apiVersion: v1
+data:
+  key.json: ""
+  root-password: endCM0VHQkhrVA==
+  root-user: YWRtaW4=
+kind: Secret
+metadata:
+  labels:
+    app.kubernetes.io/instance: minio
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: minio
+    helm.sh/chart: minio-10.1.8
+  name: minio
+  namespace: sample-namespace
+type: Opaque
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app.kubernetes.io/instance: minio
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: minio
+    helm.sh/chart: minio-10.1.8
+  name: minio
+  namespace: sample-namespace
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: minio
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: minio
+    helm.sh/chart: minio-10.1.8
+  name: minio
+  namespace: sample-namespace
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: minio-api
+    port: 9000
+    targetPort: minio-api
+  - name: minio-console
+    port: 9001
+    targetPort: minio-console
+  selector:
+    app.kubernetes.io/instance: minio
+    app.kubernetes.io/name: minio
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kbld.k14s.io/images: |
+      - Metas:
+        - Tag: 2022.2.16-centos-7-r0
+          Type: resolved
+          URL: gcr.io/sys-2b0109it/demo/bitnami/minio:2022.2.16-centos-7-r0
+        URL: gcr.io/sys-2b0109it/demo/bitnami/minio@sha256:1a2d535b5e4dafbc4f5af2984c854f1df2cc46aa53f94c386aa565569a0738ad
+  labels:
+    app.kubernetes.io/instance: minio
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: minio
+    helm.sh/chart: minio-10.1.8
+  name: minio
+  namespace: sample-namespace
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: minio
+      app.kubernetes.io/name: minio
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        checksum/credentials-secret: fd77908ef3b90c3c17719acd384e1579768ec66f0daa6340ab4baa6f2e2e2aff
+      labels:
+        app.kubernetes.io/instance: minio
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: minio
+        helm.sh/chart: minio-10.1.8
+    spec:
+      affinity:
+        nodeAffinity: null
+        podAffinity: null
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: minio
+                  app.kubernetes.io/name: minio
+              namespaces:
+              - sample-namespace
+              topologyKey: kubernetes.io/hostname
+            weight: 1
+      containers:
+      - env:
+        - name: BITNAMI_DEBUG
+          value: "false"
+        - name: MINIO_SCHEME
+          value: http
+        - name: MINIO_FORCE_NEW_KEYS
+          value: "no"
+        - name: MINIO_ROOT_USER
+          valueFrom:
+            secretKeyRef:
+              key: root-user
+              name: minio
+        - name: MINIO_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: root-password
+              name: minio
+        - name: MINIO_DEFAULT_BUCKETS
+          value: backup
+        - name: MINIO_BROWSER
+          value: "on"
+        - name: MINIO_PROMETHEUS_AUTH_TYPE
+          value: public
+        - name: MINIO_CONSOLE_PORT_NUMBER
+          value: "9001"
+        envFrom: null
+        image: gcr.io/sys-2b0109it/demo/bitnami/minio@sha256:1a2d535b5e4dafbc4f5af2984c854f1df2cc46aa53f94c386aa565569a0738ad
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /minio/health/live
+            port: minio-api
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: minio
+        ports:
+        - containerPort: 9000
+          name: minio-api
+          protocol: TCP
+        - containerPort: 9001
+          name: minio-console
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: minio-api
+          timeoutSeconds: 1
+        resources:
+          limits: {}
+          requests: {}
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1001
+        volumeMounts:
+        - mountPath: /data
+          name: data
+      securityContext:
+        fsGroup: 1001
+      serviceAccountName: minio
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: minio
