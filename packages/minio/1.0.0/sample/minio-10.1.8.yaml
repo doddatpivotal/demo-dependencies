@@ -19,7 +19,7 @@ secrets:
 apiVersion: v1
 data:
   key.json: ""
-  root-password: endCM0VHQkhrVA==
+  root-password: Z3BCWXJGYUJIRQ==
   root-user: YWRtaW4=
 kind: Secret
 metadata:
@@ -100,7 +100,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/credentials-secret: fd77908ef3b90c3c17719acd384e1579768ec66f0daa6340ab4baa6f2e2e2aff
+        checksum/credentials-secret: 9917c3736102464169c8529a17fd3f27a2b28b2792fd17a75a55a38e3d89c06f
       labels:
         app.kubernetes.io/instance: minio
         app.kubernetes.io/managed-by: Helm

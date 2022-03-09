@@ -29,7 +29,6 @@ spec:
             - '-'
             #! This was a really great idea to just use the same values file from helm and ytt.
             - chart/values.yaml
-            - config/
         - kbld:
             paths:
             - '-'

@@ -52,7 +52,6 @@ spec:
           paths:
           - '-'
           - chart/values.yaml
-          - config/
       - kbld:
           paths:
           - '-'
