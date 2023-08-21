@@ -33,4 +33,17 @@ tanzu package install elasticsearch-kibana \
     --package-name ek.external.demo-dependencies.learn \
     --version 1.0.0 \
     --values-file /tmp/values.yaml
+
+cat > /tmp/minio-values.yaml << EOF
+EOF
+
+tanzu package install minio \
+    --package-name minio.external.demo-dependencies.learn \
+    --version 1.0.0 \
+    --values-file /tmp/minio-values.yaml
+
 ```
+
+## Source and Inspiration
+
+Thank you to [https://github.com/voor/gitlab-runner-helm-imgpkg](https://github.com/voor/gitlab-runner-helm-imgpkg) for guidance.
